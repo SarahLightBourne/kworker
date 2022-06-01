@@ -9,7 +9,7 @@ response_text = '''This bot will send notifications only for the chosen ones'''
 async def start_help(message: Message) -> None:
   await message.answer(response_text)
 
-  if message.from_user.id not in CHOSEN_ONES:
+  if message.from_user.id not in CHOSEN_ONES.data:
     await asyncio.sleep(1.5)
     await message.answer('And you are not one of them')
     await asyncio.sleep(0.5)

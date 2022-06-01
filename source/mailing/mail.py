@@ -42,7 +42,7 @@ async def mail() -> None:
     else:
       avatar = None
 
-    for chosen_one in CHOSEN_ONES:
+    for chosen_one in CHOSEN_ONES.data:
 
       if avatar:
         await telegram_bot.send_photo(chosen_one, avatar, caption=text, parse_mode='HTML')
