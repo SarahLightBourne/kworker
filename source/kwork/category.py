@@ -37,7 +37,7 @@ class Category:
 
     for project in parser.find_all(class_='card'):
 
-      if (project_id := project.get('data-id')) in self.projects_cache:
+      if (project_id := int(project.get('data-id'))) in self.projects_cache:
         continue
 
       self.update_cache(project_id)
