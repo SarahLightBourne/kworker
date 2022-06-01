@@ -76,7 +76,7 @@ class Category:
         'title': title,
         'text': text,
         'client_name': client_name,
-        'projecgts_count': projects_count,
+        'projects_count': projects_count,
         'time_left': time_left,
         'offers_count': offers_count,
         'price': price,
