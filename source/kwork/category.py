@@ -22,11 +22,11 @@ class Category:
 
   async def parse_category(self) -> Union[List[Dict], None]:
     session = await requests_session.get_requests_session()
-
-    if ((response := await session.get(self.URL, params=self.params)).status_code != 200):
-      return log_error("Can't get response")
-
     try:
+
+      if ((response := await session.get(self.URL, params=self.params)).status_code != 200):
+        return log_error("Can't get response")
+
       return self.__parse(response.text)
     except Exception as error:
       log_error(error)
