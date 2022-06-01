@@ -26,8 +26,14 @@ class Category:
     if ((response := await session.get(self.URL, params=self.params)).status_code != 200):
       return print("Can't get response")
 
+    try:
+      return self.__parse(response.text)
+    except Exception as error:
+      print('Error', type(error), error)
+
+  def __parse(self, html_code: str) -> Union[List[Dict], None]:
     result: List[Dict] = list()
-    parser = BeautifulSoup(response.text, 'html.parser')
+    parser = BeautifulSoup(html_code, 'html.parser')
 
     for project in parser.find_all(class_='card'):
 
