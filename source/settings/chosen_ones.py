@@ -12,9 +12,15 @@ class ChosenOnes:
     with open(PATH, 'rb') as file:
       self.data = orjson.loads(file.read())
 
-  def write(self, item: int) -> None:
+  def add(self, item: int) -> None:
     self.data.append(item)
+    self.write()
 
+  def remove(self, item: int) -> None:
+    self.data.remove(item)
+    self.write()
+
+  def write(self) -> None:
     with open(PATH, 'wb') as file:
       file.write(orjson.dumps(self.data, option=orjson.OPT_INDENT_2))
 
