@@ -48,7 +48,7 @@ async def mail() -> None:
         if avatar:
           await telegram_bot.send_photo(chosen_one, avatar, caption=text, parse_mode='HTML')
         else:
-          await telegram_bot.send_message(chosen_one, text, parse_mode='HTML')
+          await telegram_bot.send_message(chosen_one, text, parse_mode='HTML', disable_web_page_preview=True)
       except Exception as error:
         log_error(error)
 
