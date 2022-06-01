@@ -39,9 +39,16 @@ async def mail() -> None:
     if project['avatar']:
       response = await session.get(project['avatar'])
       avatar = BytesIO(response.read())
+    else:
+      avatar = None
 
     for chosen_one in CHOSEN_ONES:
-      await telegram_bot.send_photo(chosen_one, avatar, caption=text, parse_mode='HTML')
+
+      if avatar:
+        await telegram_bot.send_photo(chosen_one, avatar, caption=text, parse_mode='HTML')
+      else:
+        await telegram_bot.send_message(chosen_one, text, parse_mode='HTML')
+
       await asyncio.sleep(0.5)
 
     await asyncio.sleep(1)
