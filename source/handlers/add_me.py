@@ -9,7 +9,7 @@ from aiogram.dispatcher import FSMContext
 async def add_me(message: Message, state: FSMContext) -> None:
   user_id = message.from_user.id
 
-  if not user_id in CHOSEN_ONES.data:
+  if user_id in CHOSEN_ONES.data:
     return await message.answer('You are already added')
 
   async with state.proxy() as data:
