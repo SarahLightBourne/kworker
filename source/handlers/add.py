@@ -17,6 +17,6 @@ async def add(message: Message, regexp_command: Match) -> None:
   await message.answer('Added')
 
   try:
-    await telegram_bot.send_message(to_add, 'You have been added!', keyboard)
+    await telegram_bot.send_message(to_add, 'You have been added!', reply_markup=keyboard)
   except:
     pass

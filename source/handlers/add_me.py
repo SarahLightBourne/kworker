@@ -21,3 +21,5 @@ async def add_me(message: Message, state: FSMContext) -> None:
 
   await telegram_bot.send_message(CREATOR_ID, f'Wants to be added <code>{user_id}</code> @{message.from_user.username}', parse_mode='HTML')
   await message.forward(CREATOR_ID)
+
+  await message.answer('Proposition sent')
