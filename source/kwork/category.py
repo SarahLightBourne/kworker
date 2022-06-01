@@ -48,7 +48,7 @@ class Category:
         if not (avatar := avatar.get('data-srcset')):
           avatar = None
         else:
-          avatar = list(map(str.strip, avatar.split(',')))[-1]
+          avatar = list(map(str.strip, avatar.split(',')))[-1].split(' ')[0].strip()
 
       statistics = project.find(class_='want-payer-statistic').text
       client_name = name_re.findall(statistics)[0].strip()
@@ -80,6 +80,7 @@ class Category:
         'time_left': time_left,
         'offers_count': offers_count,
         'price': price,
+        'avatar': avatar,
         'url': self.PROJECT_URL.format(project_id=project_id),
         'category': self.name
       })
