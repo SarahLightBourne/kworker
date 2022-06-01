@@ -1,3 +1,4 @@
+from ..settings.telegram_bot import telegram_bot
 from ..settings.chosen_ones import CHOSEN_ONES
 
 from re import Match
@@ -12,3 +13,8 @@ async def add(message: Message, regexp_command: Match) -> None:
 
   CHOSEN_ONES.add(to_add)
   await message.answer('Added')
+
+  try:
+    await telegram_bot.send_message(to_add, 'You have been added!')
+  except:
+    pass

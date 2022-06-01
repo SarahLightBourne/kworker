@@ -1,3 +1,4 @@
+from ..settings.telegram_bot import telegram_bot
 from ..settings.chosen_ones import CHOSEN_ONES
 
 from re import Match
@@ -12,3 +13,8 @@ async def remove(message: Message, regexp_command: Match) -> None:
 
   CHOSEN_ONES.remove(to_remove)
   await message.answer('Removed')
+
+  try:
+    telegram_bot.send_message(to_remove, 'You have been removed')
+  except:
+    pass
