@@ -1,4 +1,4 @@
-from ..utilities import requests_session
+from ..utilities import requests_session, log_error
 
 from re import compile
 from bs4 import BeautifulSoup
@@ -24,12 +24,12 @@ class Category:
     session = await requests_session.get_requests_session()
 
     if ((response := await session.get(self.URL, params=self.params)).status_code != 200):
-      return print("Can't get response")
+      return log_error("Can't get response")
 
     try:
       return self.__parse(response.text)
     except Exception as error:
-      print('Error', type(error), error)
+      log_error(error)
 
   def __parse(self, html_code: str) -> Union[List[Dict], None]:
     result: List[Dict] = list()

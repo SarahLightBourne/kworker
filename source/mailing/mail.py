@@ -1,7 +1,7 @@
 from ..kwork import kwork
 from ..settings import telegram_bot
-from ..utilities import requests_session
 from ..settings.chosen_ones import CHOSEN_ONES
+from ..utilities import requests_session, log_error
 
 import asyncio
 from io import BytesIO
@@ -44,10 +44,13 @@ async def mail() -> None:
 
     for chosen_one in CHOSEN_ONES.data:
 
-      if avatar:
-        await telegram_bot.send_photo(chosen_one, avatar, caption=text, parse_mode='HTML')
-      else:
-        await telegram_bot.send_message(chosen_one, text, parse_mode='HTML')
+      try:
+        if avatar:
+          await telegram_bot.send_photo(chosen_one, avatar, caption=text, parse_mode='HTML')
+        else:
+          await telegram_bot.send_message(chosen_one, text, parse_mode='HTML')
+      except Exception as error:
+        log_error(error)
 
       await asyncio.sleep(0.5)
 
