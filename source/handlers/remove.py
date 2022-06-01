@@ -15,6 +15,6 @@ async def remove(message: Message, regexp_command: Match) -> None:
   await message.answer('Removed')
 
   try:
-    telegram_bot.send_message(to_remove, 'You have been removed')
+    await telegram_bot.send_message(to_remove, 'You have been removed')
   except:
     pass
