@@ -6,3 +6,5 @@ from .add import add
 from .remove import remove
 from .add_me import add_me
 from .get_logs import get_logs
+from .favourite import favourite
+from .list_favourites import list_favourites
