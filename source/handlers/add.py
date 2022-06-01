@@ -2,7 +2,9 @@ from ..settings.telegram_bot import telegram_bot
 from ..settings.chosen_ones import CHOSEN_ONES
 
 from re import Match
-from aiogram.types import Message
+from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton
+
+keyboard = ReplyKeyboardMarkup([[KeyboardButton('Favourites')]], resize_keyboard=True)
 
 
 async def add(message: Message, regexp_command: Match) -> None:
@@ -15,6 +17,6 @@ async def add(message: Message, regexp_command: Match) -> None:
   await message.answer('Added')
 
   try:
-    await telegram_bot.send_message(to_add, 'You have been added!')
+    await telegram_bot.send_message(to_add, 'You have been added!', keyboard)
   except:
     pass
