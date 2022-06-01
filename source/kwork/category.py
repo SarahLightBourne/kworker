@@ -17,7 +17,6 @@ class Category:
     self.projects_cache: List[str] = list()
 
   def update_cache(self, item: int, limit: int = 15) -> None:
-    print(item)
     self.projects_cache.insert(0, item)
     self.projects_cache = self.projects_cache[:limit]
 
@@ -40,20 +39,32 @@ class Category:
       text = project.find(class_='wants-card__description-text').text.split('Показать полностью')[1].rstrip('Скрыть').strip()
 
       if (avatar := project.find(class_='user-avatar__picture') or None):
-        avatar = list(map(str.strip, avatar.get('data-srcset').split(',')))[-1]
+        if not (avatar := avatar.get('data-srcset')):
+          avatar = None
+        else:
+          avatar = list(map(str.strip, avatar.split(',')))[-1]
 
       statistics = project.find(class_='want-payer-statistic').text
       client_name = name_re.findall(statistics)[0].strip()
       projects_count = projects_re.findall(statistics)[0].strip()
-      time_left, offers_count = project.find(class_='query-item__info').text.split(' \xa0\xa0\xa0')
-      time_left, offers_count = time_left.strip(), offers_count.strip()
+
+      step = project.find(class_='query-item__info').text.split(' \xa0\xa0\xa0')
+      if len(step) == 1:
+        time_left = None
+        offers_count = step[0].strip()
+      else:
+        time_left, offers_count = step
+        time_left, offers_count = time_left.strip(), offers_count.strip()
+
       price_string = project.find(class_='wants-card__right').text
 
-      if 'до:' in price_string:
+      if 'Цена до:' in price_string:
         price = {'price': price_string.split('до: ')[1].replace(' ', '.').replace('\xa0', ''), 'price_up_to': None}
-      else:
+      elif 'Желаемый бюджет' in price_string:
         price_string = price_string.split(': до ')
         price = {'price': price_string[1].replace(' ', '.').replace('\xa0', '').replace('Допустимый', ''), 'price_up_to': price_string[2].replace(' ', '.').replace('\xa0', '')}
+      else:
+        price = {'price': price_string.replace('Цена ', '').replace('\xa0', '')}
 
       result.append({
         'title': title,
@@ -63,7 +74,8 @@ class Category:
         'time_left': time_left,
         'offers_count': offers_count,
         'price': price,
-        'url': self.PROJECT_URL.format(project_id=project_id)
+        'url': self.PROJECT_URL.format(project_id=project_id),
+        'category': self.name
       })
 
-    return result
+    return result or None
