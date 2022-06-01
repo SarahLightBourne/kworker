@@ -1,5 +1,6 @@
 from ..utilities import requests_session, log_error
 
+import asyncio
 from re import compile
 from bs4 import BeautifulSoup
 from typing import Dict, List, Union
@@ -24,7 +25,13 @@ class Category:
     session = await requests_session.get_requests_session()
     try:
 
-      if ((response := await session.get(self.URL, params=self.params)).status_code != 200):
+      for counter in range(5):
+        if ((response := await session.get(self.URL, params=self.params)).status_code != 200):
+          await asyncio.sleep(1 * counter)
+          continue
+        else:
+          break
+      else:
         return log_error("Can't get response")
 
       return self.__parse(response.text)
