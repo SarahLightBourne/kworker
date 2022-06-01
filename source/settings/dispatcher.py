@@ -7,7 +7,8 @@ from ..handlers import (
   contact,
   sticker,
   add,
-  remove
+  remove,
+  add_me
 )
 
 from aiogram import Dispatcher
@@ -34,3 +35,5 @@ dispatcher.register_message_handler(
   lambda msg: msg.from_user.id == CREATOR_ID,
   RegexpCommandsFilter([r'/remove ([0-9]+)'])
 )
+
+dispatcher.register_message_handler(add_me, commands=['add_me'])
