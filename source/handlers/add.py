@@ -1,0 +1,14 @@
+from ..settings.chosen_ones import CHOSEN_ONES
+
+from re import Match
+from aiogram.types import Message
+
+
+async def add(message: Message, regexp_command: Match) -> None:
+  to_add = int(regexp_command.group(1))
+
+  if to_add in CHOSEN_ONES.data:
+    return await message.answer('This ID is already added')
+
+  CHOSEN_ONES.add(to_add)
+  await message.answer('Added')
