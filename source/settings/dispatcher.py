@@ -1,4 +1,4 @@
-from .settings import CREATOR_NICKNAME
+from .settings import CREATOR_ID
 from .telegram_bot import telegram_bot
 
 from ..handlers import (
@@ -23,16 +23,14 @@ dispatcher.register_message_handler(error, commands=['error'])
 dispatcher.register_message_handler(contact, commands=['contact'])
 dispatcher.register_message_handler(sticker, content_types=['sticker'])
 
-CREATOR_NICKNAME_LOWER = CREATOR_NICKNAME.lower()
-
 dispatcher.register_message_handler(
   add,
-  lambda msg: msg.from_user.username.lower() == CREATOR_NICKNAME_LOWER,
+  lambda msg: msg.from_user.id == CREATOR_ID,
   RegexpCommandsFilter([r'/add ([0-9]+)'])
 )
 
 dispatcher.register_message_handler(
   remove,
-  lambda msg: msg.from_user.username.lower() == CREATOR_NICKNAME_LOWER,
+  lambda msg: msg.from_user.id == CREATOR_ID,
   RegexpCommandsFilter([r'/remove ([0-9]+)'])
 )
