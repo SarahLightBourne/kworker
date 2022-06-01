@@ -8,7 +8,8 @@ from ..handlers import (
   sticker,
   add,
   remove,
-  add_me
+  add_me,
+  get_logs
 )
 
 from aiogram import Dispatcher
@@ -27,13 +28,19 @@ dispatcher.register_message_handler(sticker, content_types=['sticker'])
 dispatcher.register_message_handler(
   add,
   lambda msg: msg.from_user.id == CREATOR_ID,
-  RegexpCommandsFilter([r'/add ([0-9]+)'])
+  RegexpCommandsFilter([r'\/add ([0-9]+)'])
 )
 
 dispatcher.register_message_handler(
   remove,
   lambda msg: msg.from_user.id == CREATOR_ID,
-  RegexpCommandsFilter([r'/remove ([0-9]+)'])
+  RegexpCommandsFilter([r'\/remove ([0-9]+)'])
 )
 
 dispatcher.register_message_handler(add_me, commands=['add_me'])
+
+dispatcher.register_message_handler(
+  get_logs,
+  lambda msg: msg.from_user.id == CREATOR_ID,
+  RegexpCommandsFilter([r'\/get_logs ([0-9]{4})_([0-9]{2})_([0-9]{2})'])
+)

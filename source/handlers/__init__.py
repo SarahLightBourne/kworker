@@ -5,3 +5,4 @@ from .sticker import sticker
 from .add import add
 from .remove import remove
 from .add_me import add_me
+from .get_logs import get_logs
