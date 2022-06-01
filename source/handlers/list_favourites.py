@@ -11,7 +11,7 @@ async def list_favourites(message: Message, state: FSMContext):
     if not (favourites := data.get('favourites')):
       return await message.answer('You have no favourites')
 
-    for message_id in data.get('favourites'):
+    for message_id in favourites:
       await telegram_bot.forward_message(user_id, user_id, message_id)
 
     del data['favourites']
