@@ -1,1 +1,1 @@
-from .settings import TG_TOKEN
+from .settings import TG_TOKEN, CATEGORIES
