@@ -9,7 +9,7 @@ projects_re = compile(r'(\d+)')
 
 
 class Category:
-  URL = 'https://kwork.ru/projects'
+  URL = 'https://kwork.ru/projects?view=0'
   PROJECT_URL = 'https://kwork.ru/projects/{project_id}/view'
 
   def __init__(self, name: str, params: Dict) -> None:
