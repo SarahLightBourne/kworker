@@ -1,4 +1,6 @@
+from ..settings.settings import CREATOR_ID
 from ..settings.chosen_ones import CHOSEN_ONES
+from ..settings.telegram_bot import telegram_bot
 
 import asyncio
 from aiogram.types import Message
@@ -14,4 +16,5 @@ async def error(message: Message) -> None:
     await message.answer_sticker('CAACAgUAAxkBAAMmYpbwUvyU_bxZ6yWeOIWDUpIjf3MAApEGAAKcnShWpDQwb4hZSEEkBA')
   else:
     await message.answer(response_text)
-    print('Error reported by', message.from_user.username, message.from_user.id)
+    await telegram_bot.send_message(CREATOR_ID, f'Error reported by {message.from_user.id}')
+    await message.forward(CREATOR_ID)
