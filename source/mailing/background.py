@@ -5,7 +5,7 @@ import aioschedule
 
 
 async def background() -> None:
-  aioschedule.every().minute.do(mail)
+  aioschedule.every(2).minutes.do(mail)
   await aioschedule.run_all()
 
   while True:
