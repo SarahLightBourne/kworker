@@ -10,9 +10,7 @@ PROJECT_TEXT = '''<a href="{url}"><b>{title}</b> - <i>{category}</i></a>
 {text}
 
 Клиент: <b>{client_name}</b> - <code>{projects_count}</code> проектов
-<b>{offers_count}</b>
-
-<i>{time_left}</i>'''
+<b>{offers_count}</b>'''
 
 
 async def mail() -> None:
@@ -27,8 +25,12 @@ async def mail() -> None:
       price = project['price']['price']
 
     project['price'] = f'<b>Цена:</b> <code>{price}</code>'
+    time_left = project.pop('time_left')
 
     text = PROJECT_TEXT.format(**project)
+
+    if time_left:
+      text += f'\n\n<i>{time_left}</i>'
 
     for chosen_one in CHOSEN_ONES:
       await telegram_bot.send_message(chosen_one, text, parse_mode='HTML')
