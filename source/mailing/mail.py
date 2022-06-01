@@ -49,8 +49,7 @@ async def mail() -> None:
 
     keyboard = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton('В ибзранное', callback_data=f'favourite_{project["id"]}')]])
 
-    for chosen_one in CHOSEN_ONES.data[:1]:
-      print(chosen_one)
+    for chosen_one in CHOSEN_ONES.data:
 
       try:
         if avatar:
