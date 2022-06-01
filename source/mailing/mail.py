@@ -3,6 +3,11 @@ from ..settings import telegram_bot
 from ..settings.chosen_ones import CHOSEN_ONES
 from ..utilities import requests_session, log_error
 
+from aiogram.types import (
+  InlineKeyboardButton,
+  InlineKeyboardMarkup
+)
+
 import asyncio
 from io import BytesIO
 
@@ -42,13 +47,16 @@ async def mail() -> None:
     else:
       avatar = None
 
-    for chosen_one in CHOSEN_ONES.data:
+    keyboard = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton('В ибзранное', callback_data=f'favourite_{project["id"]}')]])
+
+    for chosen_one in CHOSEN_ONES.data[:1]:
+      print(chosen_one)
 
       try:
         if avatar:
-          await telegram_bot.send_photo(chosen_one, avatar, caption=text, parse_mode='HTML')
+          await telegram_bot.send_photo(chosen_one, avatar, caption=text, parse_mode='HTML', reply_markup=keyboard)
         else:
-          await telegram_bot.send_message(chosen_one, text, parse_mode='HTML', disable_web_page_preview=True)
+          await telegram_bot.send_message(chosen_one, text, parse_mode='HTML', disable_web_page_preview=True, reply_markup=keyboard)
       except Exception as error:
         log_error(error)
 
