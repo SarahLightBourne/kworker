@@ -73,6 +73,7 @@ class Category:
         price = {'price': price_string.replace('Цена ', '').replace('\xa0', '')}
 
       result.append({
+        'id': project_id,
         'title': title,
         'text': text,
         'client_name': client_name,
