@@ -43,9 +43,9 @@ async def mail() -> None:
 
     if project['avatar']:
       response = await session.get(project['avatar'])
-      avatar = BytesIO(response.read())
+      avatar = True
     else:
-      avatar = None
+      avatar = False
 
     keyboard = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton('В ибзранное', callback_data=f'favourite_{project["id"]}')]])
 
@@ -53,7 +53,7 @@ async def mail() -> None:
 
       try:
         if avatar:
-          await telegram_bot.send_photo(chosen_one, avatar, caption=text, parse_mode='HTML', reply_markup=keyboard)
+          await telegram_bot.send_photo(chosen_one, BytesIO(response.read()), caption=text, parse_mode='HTML', reply_markup=keyboard)
         else:
           await telegram_bot.send_message(chosen_one, text, parse_mode='HTML', disable_web_page_preview=True, reply_markup=keyboard)
       except Exception as error:
