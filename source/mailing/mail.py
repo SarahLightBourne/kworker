@@ -23,7 +23,7 @@ async def mail() -> None:
 
   for project in projects:
 
-    if (up_to := project['price']['price_up_to']):
+    if (up_to := project['price'].get('price_up_to')):
       price = f'{project["price"]["price"]} - {up_to}'
     else:
       price = project['price']['price']
