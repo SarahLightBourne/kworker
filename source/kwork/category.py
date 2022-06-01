@@ -16,7 +16,7 @@ class Category:
     self.name, self.params = name, params
     self.projects_cache: List[str] = list()
 
-  def update_cache(self, item: int, limit: int = 15) -> None:
+  def update_cache(self, item: int, limit: int = 100) -> None:
     self.projects_cache.insert(0, item)
     self.projects_cache = self.projects_cache[:limit]
 
