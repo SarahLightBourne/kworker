@@ -1,0 +1,46 @@
+[
+  {
+    "name": "HTML/CSS from Design",
+    "params": {"c": 79, "attr": 224}
+  },
+  {
+    "name": "Fixing and Adaptation HTML/CSS",
+    "params": {"c": 79, "attr": 226}
+  },
+  {
+    "name": "Android applications",
+    "params": {"c": 39, "attr": 1406}
+  },
+  {
+    "name": "Parsers",
+    "params": {"c": 41, "attr": 211}
+  },
+  {
+    "name": "Chat-Bots",
+    "params": {"c": 41, "attr": 3587}
+  },
+  {
+    "name": "Scripts",
+    "params": {"c": 41, "attr": 7352}
+  },
+  {
+    "name": "Server Administration",
+    "params": {"c": 255, "attr": 471959}
+  },
+  {
+    "name": "DNS Settings",
+    "params": {"c": 255, "attr": 472033}
+  },
+  {
+    "name": "Setting up a Hosting",
+    "params": {"c": 255, "attr": 472048}
+  },
+  {
+    "name": "New Site Creation",
+    "params": {"c": 37, "attr": 5016}
+  },
+  {
+    "name": "Copying a Site",
+    "params": {"c": 37, "attr": 5017}
+  }
+]
