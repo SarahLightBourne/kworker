@@ -10,7 +10,9 @@ PROJECT_TEXT = '''<a href="{url}"><b>{title}</b> - <i>{category}</i></a>
 {text}
 
 Клиент: <b>{client_name}</b> - <code>{projects_count}</code> проектов
-<b>{offers_count}</b>'''
+<b>{offers_count}</b>
+
+<i>{time_left}</i>'''
 
 
 async def mail() -> None:
