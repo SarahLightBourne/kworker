@@ -7,6 +7,7 @@ from typing import List, Dict, Union
 
 
 class Kwork:
+  first_run = True
 
   def __init__(self):
 
@@ -22,6 +23,10 @@ class Kwork:
     results = await asyncio.gather(*[
       category.parse_category()
     for category in self.categories])
+
+    if self.first_run:
+      self.first_run = False
+      return None
 
     if (results := list(filter(lambda el: el, results))):
       return list(reduce(lambda a, x: a + x, results))
