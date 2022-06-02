@@ -23,6 +23,7 @@ pytz==2022.1
 rfc3986==1.5.0
 six==1.16.0
 sniffio==1.2.0
+socksio==1.0.0
 soupsieve==2.3.2.post1
 webencodings==0.5.1
 yarl==1.7.2
