@@ -1,6 +1,7 @@
 from ..settings import LOG
 
 import os
+import traceback
 from typing import Union
 from datetime import datetime
 
@@ -16,3 +17,4 @@ def log_error(error: Union[Exception, str]) -> None:
 
   with open(path, 'a') as file:
     print('ERROR', message, file=file)
+    print(traceback.format_exc(), file=file, end='\n\n')
