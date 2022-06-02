@@ -37,9 +37,9 @@ class Kwork:
 
       await asyncio.sleep(1)
 
-    # if self.first_run:
-    #   self.first_run = False
-    #   return None
+    if self.first_run:
+      self.first_run = False
+      return None
 
     if (results := list(filter(lambda el: el, results))):
       return list(reduce(lambda a, x: a + x, results))
