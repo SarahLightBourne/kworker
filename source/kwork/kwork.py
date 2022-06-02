@@ -21,8 +21,8 @@ class Kwork:
   async def get_new_projects(self) -> Union[List[Dict], None]:
 
     results = await asyncio.gather(*[
-      category.parse_category()
-    for category in self.categories])
+      category.parse_category(to_sleep)
+    for to_sleep, category in enumerate(self.categories, 1)])
 
     if self.first_run:
       self.first_run = False

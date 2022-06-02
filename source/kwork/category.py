@@ -21,7 +21,8 @@ class Category:
     self.projects_cache.insert(0, item)
     self.projects_cache = self.projects_cache[:limit]
 
-  async def parse_category(self) -> Union[List[Dict], None]:
+  async def parse_category(self, to_sleep: int) -> Union[List[Dict], None]:
+    await asyncio.sleep(to_sleep * 2)
     session = await requests_session.get_requests_session()
     try:
 
