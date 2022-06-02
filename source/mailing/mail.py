@@ -47,7 +47,7 @@ async def mail() -> None:
     else:
       avatar = False
 
-    keyboard = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton('В ибзранное', callback_data=f'favourite_{project["id"]}')]])
+    keyboard = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton('To favourites', callback_data=f'favourite_{project["id"]}')]])
 
     for chosen_one in CHOSEN_ONES.data:
 
