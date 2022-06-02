@@ -2,11 +2,13 @@ import asyncio
 from aiogram.utils.exceptions import NetworkError
 
 from .mailing import background
+from .utilities import requests_session
 from .settings import authenticate, dispatcher, close_session
 
 
 async def main() -> None:
   me = await authenticate()
+  await requests_session.initialise()
   asyncio.create_task(background())
 
   print('Polling started as', me)

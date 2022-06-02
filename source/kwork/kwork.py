@@ -1,5 +1,6 @@
 from .category import Category
 from ..settings import CATEGORIES
+from ..utilities import requests_session
 
 import asyncio, orjson
 from functools import reduce
@@ -19,14 +20,26 @@ class Kwork:
     for category in categories]
 
   async def get_new_projects(self) -> Union[List[Dict], None]:
+    results = list()
 
-    results = await asyncio.gather(*[
-      category.parse_category(to_sleep)
-    for to_sleep, category in enumerate(self.categories, 1)])
+    for category in self.categories:
+      session = await requests_session.get_requests_session()
 
-    if self.first_run:
-      self.first_run = False
-      return None
+      while True:
+        try:
+          result = await category.parse_category(session)
+        except ConnectionError:
+          await requests_session.refresh()
+          continue
+        else:
+          results.append(result)
+          break
+
+      await asyncio.sleep(1)
+
+    # if self.first_run:
+    #   self.first_run = False
+    #   return None
 
     if (results := list(filter(lambda el: el, results))):
       return list(reduce(lambda a, x: a + x, results))

@@ -3,6 +3,7 @@ from ..utilities import requests_session, log_error
 import asyncio
 from re import compile
 from bs4 import BeautifulSoup
+from httpx import AsyncClient
 from typing import Dict, List, Union
 
 name_re = compile(r'ь\: ([^\n]+)')
@@ -21,9 +22,7 @@ class Category:
     self.projects_cache.insert(0, item)
     self.projects_cache = self.projects_cache[:limit]
 
-  async def parse_category(self, to_sleep: int) -> Union[List[Dict], None]:
-    await asyncio.sleep(to_sleep * 2)
-    session = await requests_session.get_requests_session()
+  async def parse_category(self, session: AsyncClient) -> Union[List[Dict], str, None]:
     try:
 
       for counter in range(5):
@@ -32,12 +31,15 @@ class Category:
           continue
         else:
           break
+
       else:
-        return log_error("Can't get response")
+        log_error("Can't get response")
+        raise ConnectionError
 
       return self.__parse(response.text)
     except Exception as error:
       log_error(error)
+      raise ConnectionError
 
   def __parse(self, html_code: str) -> Union[List[Dict], None]:
     result: List[Dict] = list()
