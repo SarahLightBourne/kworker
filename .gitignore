@@ -152,3 +152,4 @@ cython_debug/
 #.idea/
 env.sh
 logs/
+config/tor_process.txt
