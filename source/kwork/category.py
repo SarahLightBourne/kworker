@@ -39,7 +39,7 @@ class Category:
       return self.__parse(response.text)
     except Exception as error:
       log_error(error)
-      raise ConnectionError
+      return 'error'
 
   def __parse(self, html_code: str) -> Union[List[Dict], None]:
     result: List[Dict] = list()
