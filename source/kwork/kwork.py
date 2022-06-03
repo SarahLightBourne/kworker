@@ -28,7 +28,8 @@ class Kwork:
       while True:
         try:
           result = await category.parse_category(session)
-        except ConnectionError:
+          assert not type(result) is str 
+        except AssertionError:
           await requests_session.refresh()
           continue
         else:

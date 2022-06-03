@@ -34,7 +34,7 @@ class Category:
 
       else:
         log_error("Can't get response")
-        raise ConnectionError
+        return 'error'
 
       return self.__parse(response.text)
     except Exception as error:
