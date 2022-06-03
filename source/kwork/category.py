@@ -52,7 +52,10 @@ class Category:
 
       self.update_cache(project_id)
       title = project.find('a').text.strip()
-      text = project.find(class_='wants-card__description-text').text.split('Показать полностью')[1].rstrip('Скрыть').strip()
+
+      text = project.find(class_='wants-card__description-text').text
+      if 'Показать полностью' in text.text:
+        text = text.split('Показать полностью')[1].rstrip('Скрыть').strip()
 
       if (avatar := project.find(class_='user-avatar__picture') or None):
         if not (avatar := avatar.get('data-srcset')):
