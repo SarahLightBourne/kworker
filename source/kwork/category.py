@@ -1,4 +1,4 @@
-from ..utilities import requests_session, log_error
+from ..utilities import log_error
 
 import asyncio
 from re import compile
