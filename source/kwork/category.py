@@ -25,15 +25,7 @@ class Category:
   async def parse_category(self, session: AsyncClient) -> Union[List[Dict], str, None]:
     try:
 
-      for counter in range(5):
-        if ((response := await session.get(self.URL, params=self.params)).status_code != 200):
-          await asyncio.sleep(1 * counter)
-          continue
-        else:
-          break
-
-      else:
-        log_error("Can't get response")
+      if ((response := await session.get(self.URL, params=self.params)).status_code != 200):
         return 'error'
 
       return self.__parse(response.text)
